@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# Christmas wishlist app
+## The Basics:
+### Explanation:
+This website allows you to easily keep track of where you can write a wishlist, and invite people to view it and check off things that they have already gotten.
+Everyone except the owner of the list can see what has been purchased already, so that duplicate presents aren't a thing on Christmas morning.
+### Example:
+1. I create a wishlist with the items “Frisbee” and “soda”, and share it with Bob and Sally.
+2. Bob gets me the Frisbee, and crosses it off the list.
+3. I look at the list and don't see a change; I add more items.
+4. Sally looks at the list and sees the crossed off Frisbee, so she looks for something else to get from the list.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Functional Overview (requirements)
 
-In the project directory, you can run:
+### MPV
+- A user can log in and immediately see their wishlist
+- A user can add, edit, and delete items from their list
+- A user can invite other people to their list
+- Invitees cannot edit, add, or delete list items on another owners list
+- Invitees can see the list, and check items that they have gotten for the list owner
+- All invitees can see which items are check, by whom, and when they were checked
+The list owner cannot see which items have been checked or not
 
-### `npm start`
+### Post-mvp Ideas
+- A user can group items in their list
+- User can have multiple lists
+- When a user logs in, they can see all their lists
+- A user can see all the lists they have been invited to
+- User can attach images or links to list items
+- Invitees can comment on a list item, either to the owner or one of the other viewers.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Questions
+- What should happens when a user deletes an item from their list that someone has checked? (and probably purchased)
+    - For now, nothing; later, maybe it sends a notification to the user that checked the item?
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technical Overview (MVP)
+### Database
+- Host on heroku
+- MongoDB schema:
 
-### `npm run build`
+    ```json
+    {
+        "users": [
+            {
+                "username": "deraj21",
+                "id": "2966357694725604",
+                "email": "deraj21@gmail.com",
+                "name": "Jared Tanner",
+                "listItems": [
+                    {
+                        "text": "Spiced ginger beer :P",
+                        "order": 0,
+                        "checked": true,
+                        "checkedBy": "rachelfowers",
+                        "checkedOn": "/yyyyMMddTHH:mmzzz/"
+                    },
+                    {
+                        "text": "Popcorn bin",
+                        "order": 1,
+                        "checked": false,
+                        "checkedBy": "",
+                        "checkedOn": null
+                    }
+                ]
+            }
+        ]
+    }
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Node server
+- to serve up react app
+- API for database
+- Creates cookies / users
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### React frontend
+- Find some kind of component library to use.
+    - Material react ui
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Invitation
+- 2 options: You load the app with the base url or by a shared link
+- Either way, it checks to see if you are logged in or not
+- If you are logged in, you are taken to your list (base url) or someone else’s list (shared link)
+- If you aren’t logged in, it takes you to the login page, and stores the url you initially tried going to as a redirect to go to once you’ve logged in
+- Once you get where you intended, the site checks to see if you are at a list that you own
+- If you are, you can change the list, but not see which items are checked
+- If you are on someone else’s list, the opposite is true; you cannot edit, but you can see which items are checked
 
-### `npm run eject`
+### Routing
+- Home  `/`
+- Login `/login`
+- List  `/list/:listId`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+--- 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Todo
+- [x] ~~Create-react-app~~
+- [x] ~~Npm install anticipated dependencies~~
+- [x] ~~Research best react ui libraries~~
+- [x] ~~Set up basic routes~~
+- [x] ~~Create github repo~~
+- [ ] Set up dummy data
+- [ ] Create todo list in github
+- [ ] **List functionality**
+  - [ ] Display list
+  - [ ] Edit item
+  - [ ] Add item
+  - [ ] Delete item
+- [ ] **Node express server**
+  - [ ] cookies
+  - [ ] oAuth
+  - [ ] Serve up react build folder
+- [ ] **Database**
+  - [ ] Learn mongo db (or other document-based db)
+  - [ ] Create db
+  - [ ] Add to node server
+- [ ] **Back in react:**
+  - [ ] User login page
+  - [ ] Routing for user’s list

@@ -20,7 +20,7 @@ Everyone except the owner of the list can see what has been purchased already, s
 - Invitees cannot edit, add, or delete list items on another owners list
 - Invitees can see the list, and check items that they have gotten for the list owner
 - All invitees can see which items are check, by whom, and when they were checked
-The list owner cannot see which items have been checked or not
+- The list owner cannot see which items have been checked or not
 
 ### Post-mvp Ideas
 - A user can group items in their list
@@ -103,9 +103,9 @@ The list owner cannot see which items have been checked or not
 - [x] ~~Research best react ui libraries~~
 - [x] ~~Set up basic routes~~
 - [x] ~~Create github repo~~
-- [ ] Set up dummy data
-- [ ] Create todo list in github
+- [x] ~~Create todo list in github~~
 - [ ] **List functionality**
+  - [ ] Set up dummy data
   - [ ] Display list
   - [ ] Edit item
   - [ ] Add item
